@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Advent of code 2020",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage --verbose"
   },
   "repository": {
     "type": "git",
