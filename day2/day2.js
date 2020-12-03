@@ -1,30 +1,30 @@
-const { forEach } = require("./data");
-const data = require("./data");
+// const data = require('./data');
 
 function debugPasswords(data) {
   const result = {
     correct: 0,
     incorrect: 0,
   };
+  let newData = data;
   /**
    * Convert a single string into an array
    */
   const isDataAnArray = Array.isArray(data);
-  if (!isDataAnArray) data = Array.of(data);
+  if (!isDataAnArray) newData = Array.of(data);
 
-  data.forEach((item) => {
+  newData.forEach((item) => {
     /**
      * Split the string into things we care about
      */
     const [min, max, matcher, password] = item.split(/(?:-| |:)+/);
 
-    const count = password.split("").filter((letter) => letter === matcher)
+    const count = password.split('').filter((letter) => letter === matcher)
       .length;
 
     if (count >= min && count <= max) {
-      result.correct++;
+      result.correct += 1;
     } else {
-      result.incorrect++;
+      result.incorrect -= 1;
     }
   });
 
@@ -36,27 +36,28 @@ function charAtPos(data) {
     correct: 0,
     incorrect: 0,
   };
+  let newData = data;
   /**
    * Convert a single string into an array
    */
   const isDataAnArray = Array.isArray(data);
-  if (!isDataAnArray) data = Array.of(data);
+  if (!isDataAnArray) newData = Array.of(data);
 
-  data.forEach((item) => {
+  newData.forEach((item) => {
     /**
      * Split the string into things we care about
      */
     const [pos1, pos2, matcher, password] = item.split(/(?:-| |:)+/);
 
     if (password[pos1 - 1] === matcher && password[pos2 - 1] === matcher) {
-      result.incorrect++;
+      result.incorrect += 1;
     } else if (
-      password[pos1 - 1] === matcher ||
-      password[pos2 - 1] === matcher
+      password[pos1 - 1] === matcher
+      || password[pos2 - 1] === matcher
     ) {
-      result.correct++;
+      result.correct += 1;
     } else {
-      result.incorrect++;
+      result.incorrect += 1;
     }
   });
 
